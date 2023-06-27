@@ -33,4 +33,9 @@ export default class Store {
             { new: true }
         )
     }
+    async delete(id) {
+        return await Model.findByIdAndDelete(
+            { _id: id }
+        )
+    }
 }

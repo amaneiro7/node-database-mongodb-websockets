@@ -38,6 +38,18 @@ export default class Controller {
             resolve(await this.store.update(id, message, this.addTime()))
         })
     }
+    delete(id) {
+        return new Promise((resolve, reject) => {
+            if (!id) {
+                console.error('[messageControler] No hay un Id valido');
+                reject('Los datos son incorrectos')
+                return
+            }
+            this.store.delete(id)
+                .then(() => resolve())
+                .catch(e => reject(e))
+        })        
+    }
     
     addTime() {
         return new Date().toLocaleString();

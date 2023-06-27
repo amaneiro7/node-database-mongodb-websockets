@@ -30,4 +30,10 @@ router.patch('/:id', (req, res) => {
         .catch(e => response.error(req, res, 'Informacion Interno', 500, e)
         )
 })
+router.delete('/:id', (req, res) => {
+    controller.delete(req.params.id)
+        .then(() => response.success(req, res, `Mensaje ${req.params.id} eliminado`, 201)) 
+        .catch(e => response.error(req, res, 'Informacion Interno', 500, e)
+        )
+})
 export default router
