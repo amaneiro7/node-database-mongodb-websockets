@@ -16,7 +16,15 @@ export default class Store {
     }
 
     async getAll() {
-        const messages = await Model.find()
-        return messages
+        return await Model.find()
+        
+    }
+
+    async update(id, message, updatedTime) {
+        return await Model.findOneAndUpdate(
+            { _id: id },
+            { $set: { message, date: updatedTime } },
+            { new: true }
+        )
     }
 }

@@ -7,7 +7,8 @@ export default class Controller {
         return new Promise((resolve, reject) => {
             if (!user || !message) {
                 console.error('[messageControler] No hay usuario o mensaje');
-                throw new Error('Los datos son incorrectos')
+                reject('Los datos son incorrectos')
+                return
             }
             const fullMessage = {
                 user,
@@ -22,6 +23,15 @@ export default class Controller {
         return new Promise((resolve, reject) => {
             resolve(this.store.getAll())
         })        
+    }
+    update(id, message) {
+        return new Promise(async (resolve, reject) => {
+            if (!id || !message) {
+                reject('Invalid data')
+                return
+            }
+            resolve(await this.store.update(id, message, this.addTime()))
+        })
     }
     
     addTime() {
