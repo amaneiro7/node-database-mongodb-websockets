@@ -19,9 +19,14 @@ export default class Controller {
             resolve(fullMessage)            
         })
     }
-    getAll() {
+    getAll(filterUser) {
         return new Promise((resolve, reject) => {
-            resolve(this.store.getAll())
+            resolve(this.store.getAll(filterUser))
+        })        
+    }
+    getById(id) {
+        return new Promise((resolve, reject) => {
+            resolve(this.store.getById(id))
         })        
     }
     update(id, message) {

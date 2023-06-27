@@ -9,15 +9,21 @@ console.log('[db] Conectada con exito');
 export default class Store {
     constructor() {}
 
-    add(message) {
-        
+    add(message) {        
         const myMessage = new Model(message)
         myMessage.save()
     }
 
-    async getAll() {
-        return await Model.find()
-        
+    async getAll(filterUser) {
+        let filter = {}
+        if (filterUser !== null) {
+            filter = { user: filterUser }
+        }
+        return await Model.find(filter)
+    }
+
+    async getById(id) {
+        return await Model.findOne({_id: id})
     }
 
     async update(id, message, updatedTime) {
