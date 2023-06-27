@@ -4,8 +4,8 @@ export default class Store {
     constructor() {}
 
     add(message) {        
-        const myMessage = new Model(message)
-        myMessage.save()
+        const myUser = new Model(message)
+        myUser.save()
     }
 
     async getAll(filterUser) {
