@@ -1,6 +1,9 @@
 import express from 'express'
 import router from './network/routes.js'
+import db from './db.js'
+import config from './config.js'
 
+db(config.mongoDB.uri)
 
 const app = express()
 app.use(express.json())
