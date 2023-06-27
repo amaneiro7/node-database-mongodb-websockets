@@ -9,11 +9,17 @@ export default class Store {
     }
 
     async getAll(filterUser) {
-        let filter = {}
-        if (filterUser !== null) {
-            filter = { user: filterUser }
-        }
-        return await Model.find(filter)
+        return new Promise(async (resolve, reject) => {
+            let filter = {}
+            if (filterUser !== null) {
+                filter = { user: filterUser }
+            }
+            const messages = Model.find(filter)
+                .populate('user')
+                .exec()                
+                .catch(e => reject(e))
+            resolve(messages)
+        })
     }
 
     async getById(id) {
