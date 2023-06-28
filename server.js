@@ -11,7 +11,7 @@ const server = http.createServer(app)
 socket.connect(server)
 
 db(config.mongoDB.uri)
-app.unsubscribe(cors())
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 // app.use(router)
