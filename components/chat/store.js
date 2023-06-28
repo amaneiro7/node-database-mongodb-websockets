@@ -8,8 +8,12 @@ export default class Store {
         return myChat.save()
     }
 
-    async getById(id) {
-        return new Promise((resolve, reject) => {
+    async getAll() {
+        return await Model.find()
+    }
+
+    async getById(userId) {
+        return new Promise(async (resolve, reject) => {
             let filter = {}
             if (userId) {
                 filter = {
@@ -17,7 +21,7 @@ export default class Store {
                 }
             }
 
-            const chatlist = Model.find(filter)
+            const chatlist = await Model.find(filter)
                 .populate('users')
                 .exec()
                 .catch(e => reject(e))
@@ -25,8 +29,8 @@ export default class Store {
         })
     }
 
-    async delete(id) {
-        if (await this.ifExist(id)) return await Model.findByIdAndDelete({ _id: id })
+    async delete(chatId) {
+        if (await this.ifExist(chatId)) return await Model.findByIdAndDelete({ _id: chatId })
     }
     
     async ifExist(id) {

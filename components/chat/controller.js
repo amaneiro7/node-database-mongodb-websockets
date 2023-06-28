@@ -5,7 +5,7 @@ export default class Controller {
     }
     add(users) {
         return new Promise((resolve, reject) => {
-            if (!user || !Array.isArray(users)) return Promise.reject('Invalid user list')
+            if (!users || !Array.isArray(users)) return Promise.reject('Invalid user list')
             const chat = {
                 users,
                 date: this.addTime()
@@ -14,19 +14,24 @@ export default class Controller {
             resolve(chat)
         })
     }
+    getAll() {
+        return new Promise((resolve, reject) => {
+            resolve(this.store.getAll())
+        })        
+    }    
     getById(userId) {
         return new Promise((resolve, reject) => {
             resolve(this.store.getById(userId))
         })        
     }    
-    delete(id) {
+    delete(chatId) {
         return new Promise((resolve, reject) => {
-            if (!id) {
+            if (!chatId) {
                 console.error('[messageControler] No hay un Id valido');
                 reject('Los datos son incorrectos')
                 return
             }
-            this.store.delete(id)
+            this.store.delete(chatId)
                 .then(resolve())
                 .catch(reject(e))
         })        
