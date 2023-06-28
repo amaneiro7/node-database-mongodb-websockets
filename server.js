@@ -12,6 +12,5 @@ app.use(express.urlencoded({ extended: true }))
 router(app)
 app.use('/app', express.static('public'))
 
-
-app.listen(3000)
-console.log('La aplicacion esta escuchando en http://localhost:3000');
+app.listen(config.port)
+console.log(`La aplicacion esta escuchando en el puerto ${config.port}}`)

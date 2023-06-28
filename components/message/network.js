@@ -6,7 +6,11 @@ const router = express.Router()
 
 // Crear un mensaje
 router.post('/', (req, res) => {
-  controller.add(req.body.chat, req.body.user, req.body.message)
+  controller.add({
+    chat: req.body.chat,
+    user: req.body.user,
+    message: req.body.message
+  })
     .then(data => response.success(req, res, data, 201))
     .catch(e => response.error(req, res, 'Informacion Invalida', 400, e)
     )

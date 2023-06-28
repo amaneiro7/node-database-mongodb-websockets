@@ -4,7 +4,7 @@ export default class Controller {
     this.store = new Store()
   }
 
-  add (chat, user, message) {
+  add ({ chat, user, message }) {
     return new Promise((resolve, reject) => {
       if (!chat || !user || !message) {
         console.error('[messageControler] No hay chat, usuario o mensaje')
