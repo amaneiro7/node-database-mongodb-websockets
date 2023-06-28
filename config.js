@@ -5,7 +5,9 @@ const config = {
     host: process.env.MONGODB_HOST || 'cluster0.trucfof.mongodb.net',
     uri: process.env.MONGODB_URI || 'mongodb+srv://amaneiro7:OL2zAEMYH5PJON36@cluster0.trucfof.mongodb.net/'
   },
-  port: process.env.PORT || 3000
+  port: process.env.PORT || 3000,
+  host: process.env.HOST || 'http://localhost',
+  publicRoute: process.env.PUBLIC_ROUTE || 'app'
 }
 
 export default config

@@ -16,7 +16,7 @@ export default class Controller {
       }
       let fileUrl = ''
       if (file) {
-        fileUrl = `http://localhost:${config.port}/app/files/${file.filename}`
+        fileUrl = `${config.host}:${config.port}/${config.publicRoute}/files/${file.filename}`
       }
       const fullMessage = {
         chat,
@@ -32,9 +32,6 @@ export default class Controller {
   }
 
   getAll (filterUser) {
-    return new Promise((resolve, reject) => {
-      resolve(this.store.getAll(filterUser))
-    })
   }
 
   getById (id) {

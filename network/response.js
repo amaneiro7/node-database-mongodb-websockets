@@ -1,15 +1,21 @@
 import chalk from 'chalk'
+const statusMessage = {
+  200: 'Done',
+  201: 'Created',
+  400: 'Invalid format',
+  500: 'Internal Error'
+}
 
-const success = (req, res, message, status) =>
-  res.status(status || 200).send({
+const success = (req, res, message, status = 200) =>
+  res.status(status).send({
     error: '',
-    body: message
+    body: message || statusMessage[status]
   })
 
-const error = (req, res, message, status, details) => {
+const error = (req, res, message, status = 500, details) => {
   console.error(chalk.red('[response error]', details))
-  res.status(status || 500).send({
-    error: message,
+  res.status(status).send({
+    error: message || statusMessage[status],
     body: ''
   })
 }
