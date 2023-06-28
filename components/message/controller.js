@@ -1,12 +1,13 @@
 import Store from './store.js'
 import config from '../../config.js'
+import websocket from '../../socket.js'
+
 export default class Controller {
   constructor () {
     this.store = new Store()
   }
 
   add ({ chat, user, message, file }) {
-    console.log(file)
     return new Promise((resolve, reject) => {
       if (!chat || !user || !message) {
         console.error('[messageControler] No hay chat, usuario o mensaje')
@@ -24,6 +25,7 @@ export default class Controller {
         date: this.addTime(),
         file: fileUrl
       }
+      websocket.socket.io.emit('message', fullMessage)
       this.store.add(fullMessage)
       resolve(fullMessage)
     })
