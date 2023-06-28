@@ -1,15 +1,21 @@
 import express from 'express'
+import multer from 'multer'
 import response from '../../network/response.js'
 import Controller from './controller.js'
 const controller = new Controller()
 const router = express.Router()
 
+const upload = multer({
+  dest: 'public/files/'
+})
+
 // Crear un mensaje
-router.post('/', (req, res) => {
+router.post('/', upload.single('file'), (req, res) => {
   controller.add({
     chat: req.body.chat,
     user: req.body.user,
-    message: req.body.message
+    message: req.body.message,
+    file: req.file
   })
     .then(data => response.success(req, res, data, 201))
     .catch(e => response.error(req, res, 'Informacion Invalida', 400, e)

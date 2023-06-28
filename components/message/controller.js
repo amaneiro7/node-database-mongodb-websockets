@@ -1,21 +1,28 @@
 import Store from './store.js'
+import config from '../../config.js'
 export default class Controller {
   constructor () {
     this.store = new Store()
   }
 
-  add ({ chat, user, message }) {
+  add ({ chat, user, message, file }) {
+    console.log(file)
     return new Promise((resolve, reject) => {
       if (!chat || !user || !message) {
         console.error('[messageControler] No hay chat, usuario o mensaje')
         reject(new Error('Los datos son incorrectos'))
         return
       }
+      let fileUrl = ''
+      if (file) {
+        fileUrl = `http://localhost:${config.port}/app/files/${file.filename}`
+      }
       const fullMessage = {
         chat,
         user,
         message,
-        date: this.addTime()
+        date: this.addTime(),
+        file: fileUrl
       }
       this.store.add(fullMessage)
       resolve(fullMessage)
